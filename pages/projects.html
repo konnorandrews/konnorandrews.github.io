@@ -1,0 +1,11 @@
+---
+layout: page
+title: Projects
+permalink: /projects/
+---
+
+<h4>Projects</h4>
+{% for project in site.projects %}
+<time>{{ project.date | date: "%b %-d, %Y" }}</time>
+<h3><a href="{{ project.url | prepend: site.baseurl }}">{{ project.title }}</a></h3>
+{% endfor %}
