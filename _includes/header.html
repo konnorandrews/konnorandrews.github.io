@@ -1,0 +1,36 @@
+<script src="/javascript/typingAnimation.js"></script>
+
+<aside>
+    <div class="container">
+      <div class="logo">
+        <a href="{{ site.url }}"><img src="/images/20161014_154131.jpg"></a>
+        <div>
+          <a href="{{ site.url }}" style="text-decoration: none;"><h2>Konnor Andrews</h2></a>
+          <h3 class="typewrite" data-period="2000" data-type='[
+            "I Love Math.",
+            "I Build Contraptions.",
+            "I Program Robots.",
+            "I am a Software Developer." ]'>
+            <span class="wrap"></span>
+          </h3>
+        </div>
+      </div>
+  		<nav>
+  			<ul>
+  				<!--{% for page in site.pages %} {% if page.title %}
+  				<li><a href="{{ page.url | prepend: site.baseurl }}">{{ page.title }}</a></li>
+  				{% endif %} {% endfor %}-->
+  				<li><a href="{{ "/demos/pathfinding" | prepend: site.baseurl }}">Demos</a></li>
+  				<li><a href="{{ "/blog" | prepend: site.baseurl }}">Projects</a></li>
+  				<li><a href="{{ "/blog" | prepend: site.baseurl }}">Blog</a></li>
+  				<li><a href="{{ "/blog" | prepend: site.baseurl }}">About Me</a></li>
+  			</ul>
+  			</li>
+  			</ul>
+  		</nav>
+  	</div>
+</aside>
+
+<!--<header>
+  <h1><a href="{{ site.url }}">{{ site.title }}</a></h1>
+</header>-->
