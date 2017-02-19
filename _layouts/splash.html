@@ -4,29 +4,6 @@
 {% include splash_head.html %}
 
 <style>
-html_test {
-    position: relative;
-    min-height: 100%;
-}
-html_test::before {
-    content: " ";
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    background: url({{ page.splash_image | prepend: site.baseurl }}) top left repeat scroll;
-    z-index: -1;
-    filter: blur({{page.blur_amount}}px); /* Someday, sigh ... */
-  	-webkit-filter: blur({{page.blur_amount}}px); /* Prefixed CSS3 blur filters */
-  	-moz-filter: blur({{page.blur_amount}}px);
-  	-o-filter: blur({{page.blur_amount}}px);
-  	-ms-filter: blur({{page.blur_amount}}px);
-  	filter: url(#blur); /* Firefox needs SVG */
-    filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius='{{page.blur_amount}}'); /* IE lte 9 */
-
-    background-size: cover;
-}
 #background-div{
   padding: 0;
   margin: 0;
@@ -42,7 +19,7 @@ html_test::before {
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
-  background-color: #464646;
+  background-color: #FAFAFA;
 
   filter: url(#blur); /* Firefox needs SVG */
   -webkit-filter: blur({{page.blur_amount}}px); /* Prefixed CSS3 blur filters */
