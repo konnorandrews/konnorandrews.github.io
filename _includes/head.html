@@ -20,4 +20,9 @@
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700,800,600' rel='stylesheet' type='text/css'>
 	<link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
 
+	<!-- Custom JavaScript files set in YAML front matter -->
+	{% for js in page.customjs %}
+	<script async type="text/javascript" src="{{ js }}"></script>
+	{% endfor %}
+
 </head>
