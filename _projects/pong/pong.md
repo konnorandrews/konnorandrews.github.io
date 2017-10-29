@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Pong"
+title:  "Pong (Beginner Tutorial)"
 date:   2017-10-28
 categories: javascript
 customjs:
@@ -9,6 +9,7 @@ customjs:
  - /javascript/p5DemoEnable.js
  - bounceSketch.js
  - paddleSketch.js
+ - finishedGameSketch.js
 ---
 
 Pong project
@@ -158,12 +159,11 @@ Move paddles using keyboard. w,s and p,l using keycode.info
   }
 ...
 function movePaddle(paddle, buttons){
-  if(p.keyIsDown(buttons.up)){
+  if(p.keyIsDown(buttons.up))
     paddle.y -= 10
-  }
-  if(p.keyIsDown(buttons.down)){
+
+  if(p.keyIsDown(buttons.down))
     paddle.y += 10
-  }
 }
 ...
 function draw() {
@@ -177,12 +177,11 @@ function draw() {
 make paddles collide with bottom and top.
 ```javascript
 function keepPaddleOnBoard(paddleConfig, paddle, board){
-  if(paddle.y < 0){
+  if(paddle.y < 0)
     paddle.y = 0
-  }
-  if(paddle.y + paddleConfig.height > board.height){
+
+  if(paddle.y + paddleConfig.height > board.height)
     paddle.y = board.height - paddleConfig.height
-  }
 }
 ...
 function draw() {
@@ -193,6 +192,89 @@ function draw() {
 }
 ```
 
-
 [Paddle Sketch](paddleSketch.js)
 <div id="paddle_sketch_holder" style="display: flex; justify-content: center; align-items: center;"></div>
+
+
+Make ball bounce off the paddles
+```javascript
+function keepPaddleOnBoard(paddleConfig, paddle, board){
+  if(paddle.y < 0)
+    paddle.y = 0
+
+  if(paddle.y + paddleConfig.height > board.height)
+    paddle.y = board.height - paddleConfig.height
+}
+...
+function draw() {
+  ...
+  keepPaddleOnBoard(game.paddleConfig, game.leftPlayer.paddle, game.board)
+  keepPaddleOnBoard(game.paddleConfig, game.rightPlayer.paddle, game.board)
+  ...
+}
+```
+
+Add scoring to player objects
+```javascript
+...
+leftPlayer: {
+  ...
+  score: 0
+},
+rightPlayer: {
+  ...
+  score: 0
+}
+...
+```
+
+removing bounce on left right walls, and adding scoring
+```javascript
+...
+function bounceBallOffWalls(ball, board, leftPlayer, rightPlayer) {
+  ...
+  if (ball.x < 0){
+    rightPlayer.score++
+    resetBall(ball, board)
+  }
+
+  if (ball.x + ball.radius > board.width){
+    leftPlayer.score++
+    resetBall(ball, board)
+  }
+}
+...
+function resetBall(ball, board, goLeft){
+  ball.x = board.width / 2 - ball.radius / 2
+  ball.y = board.height / 2 - ball.radius / 2
+  ball.xVelocity = (goLeft ? -3 : 3 )
+  ball.yVelocity = 5
+}
+...
+function draw(){
+  ...
+  bounceBallOffWalls(game.ball, game.board, game.leftPlayer, game.rightPlayer)
+  ...
+}
+```
+
+draw text for scoring
+```javascript
+...
+function drawScores(leftPlayer, rightPlayer, board){
+  p.textSize(32)
+  p.text(leftPlayer.score, 50, 40)
+  p.text(rightPlayer.score, board.width - 70, 40)
+}
+...
+function draw(){
+  ...
+  drawScores(game.leftPlayer, game.rightPlayer, game.board)
+}
+```
+
+[Finished Game Sketch](finishedGameSketch.js)
+<div id="finishedGame_sketch_holder" style="display: flex; justify-content: center; align-items: center;"></div>
+
+## Styled Game
+[Pong Demo]() *Coming soon*
