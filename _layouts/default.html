@@ -10,6 +10,12 @@
 		</article>
 		{% include footer.html %}
 	</main>
+
+	<!-- Custom JavaScript files set in YAML front matter -->
+	{% for js in page.custombodyjs %}
+	<script type="{{ js.type | default: "text/javascript" }}" src="{{ js.src | default: js }}"></script>
+	{% endfor %}
+
 </body>
 
 </html>

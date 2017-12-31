@@ -22,7 +22,7 @@
 
 	<!-- Custom JavaScript files set in YAML front matter -->
 	{% for js in page.customjs %}
-	<script async type="text/javascript" src="{{ js }}"></script>
+	<script type="{{ js.type | default: "text/javascript" }}" src="{{ js.src | default: js }}"></script>
 	{% endfor %}
 
 </head>
