@@ -32,7 +32,18 @@
 </style>
 <body>
   <div id="background-div"></div>
-  {% include header.html %}
+  <div class="center">
+    {% include header.html %}
+    <div class="quoteBox">
+      <p id="quote">Loading inspirational quote...</p>
+      <div class="quoteInfo">
+        <p id="author"></p>
+        <p class="powerByForismatic">
+          Powered By <a href="https://forismatic.com/en/"> Forismatic.com </a>
+        </p>
+      </div>
+    </div>
+  </div>
 	{{ content }}
 </body>
 <script>
@@ -62,8 +73,20 @@ function css3FilterFeatureDetect(enableWebkit) {
 if (!css3FilterFeatureDetect()){
   var elem = document.getElementById("background-div");
   elem.parentNode.removeChild(elem);
-  window.alert("Your browser does not support elements used in this website.");
+  //window.alert("Your browser does not support elements used in this website.");
 }
+function displayQuote(response) {
+  document.getElementById("quote").innerHTML = response.quoteText
+  document.getElementById("author").innerHTML = "- " + (response.quoteAuthor || "unknown")
+}
+function fetchQuote(){
+  var script = document.createElement("script")
+  script.src = "http://api.forismatic.com/api/1.0/?method=getQuote&lang=en&format=jsonp&jsonp=displayQuote"
+  document.getElementsByTagName("head")[0].appendChild(script)
+}
+//document.getElementById("quote").innerHTML = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin velit tellus, dignissim eu euismod cursus, laoreet sed felis. Nullam lacinia."
+//document.getElementById("author").innerHTML = "Someone that was important"
+fetchQuote();
 </script>
 
 </html>
