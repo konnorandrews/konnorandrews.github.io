@@ -81,7 +81,7 @@ function displayQuote(response) {
 }
 function fetchQuote(){
   var script = document.createElement("script")
-  script.src = "http://api.forismatic.com/api/1.0/?method=getQuote&lang=en&format=jsonp&jsonp=displayQuote"
+  script.src = "https://api.forismatic.com/api/1.0/?method=getQuote&lang=en&format=jsonp&jsonp=displayQuote"
   document.getElementsByTagName("head")[0].appendChild(script)
 }
 //document.getElementById("quote").innerHTML = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin velit tellus, dignissim eu euismod cursus, laoreet sed felis. Nullam lacinia."
