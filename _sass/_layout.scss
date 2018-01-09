@@ -120,11 +120,24 @@ aside {
 					line-height: 20px;
 					margin-bottom: -1px;
 					box-shadow: 0;
-					&:hover,
-					&:active {
+					&:hover{
 						background: $header;
 						text-decoration: none;
 						color: $main;
+						position: relative;
+					}
+					&:hover:after,
+					&:active:after {
+					    content: '';
+					    display: block;
+					    background: #1D1425;
+					    text-decoration: none;
+					    position: absolute;
+					    width: 100%;
+					    top: 0;
+					    right: 0;
+					    z-index: -1;
+					    animation: growUp 0.3s cubic-bezier(0.45, 0.01, 0.01, 1.18);
 					}
 				}
 			}
@@ -204,4 +217,13 @@ footer {
 	z-index: 10;
 	opacity: 1;
   font-size: 150%;
+}
+
+@keyframes growUp {
+	0% {
+		height: 0%;
+	}
+	100% {
+		height: 100%;
+	}
 }
