@@ -5,7 +5,8 @@ permalink: /projects/
 ---
 
 <h4>Projects</h4>
-{% for project in site.projects %}
+{% assign projectsByDate = site.projects | sort: 'date' %}
+{% for project in projectsByDate reversed %}
 <time>{{ project.date | date: "%b %-d, %Y" }}</time>
 <h3><a href="{{ project.url | prepend: site.baseurl }}">{{ project.title }}</a></h3>
 {% endfor %}
