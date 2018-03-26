@@ -3,7 +3,7 @@ layout: post
 title:  "Pong (Beginner Tutorial)"
 date:   2017-10-28
 categories: javascript
-customjs:
+custombodyjs:
  - /libraries/p5.js
  - /libraries/p5.dom.js
  - /javascript/p5DemoEnable.js

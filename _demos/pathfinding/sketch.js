@@ -1,3 +1,11 @@
+stoppable(function(onStop){
+  
+var sketch = function( p ) {
+
+  onStop.then(function(){
+    p.noLoop();
+  })
+
 var cWidth = 700, cHeight = 700;
 var cOffsetX = 0, cOffsetY = 0;
 var cubeXnum = 30, cubeX = cWidth / cubeXnum;
@@ -16,10 +24,10 @@ var nPattern = [{x: -1, y: 0, cost:1},
                 {x: 1, y: -1, cost:1},
                 {x: -1, y: 1, cost:1}];*/
 
-function setup() {
-  var canvas = createCanvas(cWidth, cHeight);
+p.setup = function() {
+  var canvas = p.createCanvas(cWidth, cHeight);
 
-  canvas.parent('sketch-holder');
+  //canvas.parent('sketch-holder');
 
   for(var i = 0; i < cubeYnum; i++) {
     var rowCubes = [];
@@ -30,7 +38,9 @@ function setup() {
   }
 }
 
-function draw() {
+p.draw = function() {
+  p.background(220)
+  if(isDemoEnabled(p, 'sketch')){
   //reset
   for(var i = 0; i < cubeYnum; i++) {
     for(var j = 0; j < cubeXnum; j++){
@@ -41,9 +51,9 @@ function draw() {
   }
 
   // add any new bricks
-  if(mouseIsPressed){
-    var x = floor(mouseX / cubeX);
-    var y = floor(mouseY / cubeY);
+  if(p.mouseIsPressed){
+    var x = p.floor(p.mouseX / cubeX);
+    var y = p.floor(p.mouseY / cubeY);
     //console.log('X: ' + x + ' Y: ' + y);
     if(x >= 0 && x < cubeXnum && y >= 0 && y < cubeYnum){
       cubes[y][x].state = 1;
@@ -53,8 +63,8 @@ function draw() {
       //cubes[y][x - 1].state = 1;
     }
   }else{
-    end.x = floor(mouseX / cubeX);
-    end.y = floor(mouseY / cubeY);
+    end.x = p.floor(p.mouseX / cubeX);
+    end.y = p.floor(p.mouseY / cubeY);
   }
 
   //run A*
@@ -120,10 +130,10 @@ function draw() {
               !isInList(open, neighbour)){
             neighbour.g_cost = current.g_cost + nPattern[i].cost + extraCost;
 
-            var xdis = abs(neighbour.x - end.x);
-            var ydis = abs(neighbour.y - end.y);
-            var minDir = min(xdis, ydis);
-            var maxDir = max(xdis, ydis);
+            var xdis = p.abs(neighbour.x - end.x);
+            var ydis = p.abs(neighbour.y - end.y);
+            var minDir = p.min(xdis, ydis);
+            var maxDir = p.max(xdis, ydis);
 
             neighbour.isTurn = extraCost !== 0;
 
@@ -164,10 +174,10 @@ function draw() {
 
 
   //draw nodes
-  background(0);
-  for(var i = 0; i < cubeYnum; i++){
-    for(var j = 0; j < cubeXnum; j++){
-      drawNode(j * cubeX, i * cubeY, cubeX - cOffsetX, cubeY - cOffsetY, cubes[i][j]);
+    for(var i = 0; i < cubeYnum; i++){
+      for(var j = 0; j < cubeXnum; j++){
+        drawNode(j * cubeX, i * cubeY, cubeX - cOffsetX, cubeY - cOffsetY, cubes[i][j]);
+      }
     }
   }
 }
@@ -200,31 +210,46 @@ function drawNode(x_, y_, width_, height_, node_){
   var f_cost = g_cost + h_cost;
 
   if(node_.state === 2){
-    fill(100, 250, 100);
+    p.fill(100, 250, 100);
   } else if(node_.state === 3){
-    fill(250, 100, 100);
+    p.fill(250, 100, 100);
   } else if(node_.state === 1){
-    fill(100, 100, 250);
+    p.fill(100, 100, 250);
   }  else if(node_.state === 4){
-    fill(200, 200, 100);
+    p.fill(200, 200, 100);
   }else{
-    fill(250);
+    p.fill(250);
   }
-  noStroke();
-  rect(x_, y_, width_, height_);
+  p.noStroke();
+  p.rect(x_, y_, width_, height_);
 
-  fill(0);
-  textSize(16);
-  textAlign(CENTER);
+  p.fill(0);
+  p.textSize(16);
+  p.textAlign(p.CENTER);
   //text(f_cost, x_ + width_ / 2, y_ + 3 * height_ / 4);
 
-  fill(0);
-  textSize(10);
-  textAlign(LEFT);
+  p.fill(0);
+  p.textSize(10);
+  p.textAlign(p.LEFT);
   //text(g_cost, x_ + 10, y_ + height_ / 4);
 
-  fill(0);
-  textSize(10);
-  textAlign(RIGHT);
+  p.fill(0);
+  p.textSize(10);
+  p.textAlign(p.RIGHT);
   //text(h_cost, x_ + width_ - 10, y_ + height_ / 4);
 }
+}
+
+function startDemo(){
+  new p5(sketch, 'sketch-holder')
+}
+
+if (document.readyState === "complete") {
+  console.log('window loaded')
+  startDemo();
+}else{
+  console.log('window not loaded')
+  window.addEventListener("load", startDemo);
+}
+
+});
