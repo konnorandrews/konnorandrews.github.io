@@ -1,4 +1,10 @@
+stoppable(function(onStop){
+
 var paddleSketch = function( p ) {
+
+onStop.then(function(){
+  p.noLoop();
+})
 
 const game = {
   ball: {
@@ -103,4 +109,6 @@ p.draw = function() {
 
 window.addEventListener('load', function () {
   new p5(paddleSketch, 'paddle_sketch_holder')
+})
+
 })

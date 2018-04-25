@@ -144,7 +144,12 @@ function drawLeftPaddle(paddleConfig, paddle){
 }
 
 function drawRightPaddle(paddleConfig, paddle, board){
-  p.rect(board.width - paddleConfig.width - paddleConfig.wallOffset, paddle.y, paddleConfig.width, paddleConfig.height)
+  p.rect(
+    board.width - paddleConfig.width - paddleConfig.wallOffset,
+    paddle.y,
+    paddleConfig.width,
+    paddleConfig.height
+  )
 }
 ...
 function draw() {

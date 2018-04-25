@@ -1,4 +1,10 @@
+stoppable(function(onStop){
+
 var finishedGameSketch = function( p ) {
+
+onStop.then(function(){
+  p.noLoop();
+})
 
 const game = {
   ball: {
@@ -142,4 +148,6 @@ p.draw = function() {
 
 window.addEventListener('load', function () {
   new p5(finishedGameSketch, 'finishedGame_sketch_holder')
+})
+
 })

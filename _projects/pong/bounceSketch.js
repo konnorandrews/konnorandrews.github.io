@@ -1,4 +1,10 @@
+stoppable(function(onStop){
+
 var bounceSketch = function( p ) {
+
+onStop.then(function(){
+  p.noLoop();
+})
 
 const game = {
   ball: {
@@ -52,6 +58,9 @@ p.draw = function() {
 
 }
 
+// TODO not binding properly !!!!!!!
 window.addEventListener('load', function () {
   new p5(bounceSketch, 'bounce_sketch_holder')
+})
+
 })
