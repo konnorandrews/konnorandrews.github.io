@@ -1,0 +1,11 @@
+---
+layout: page
+title: Challenges
+permalink: /challenges/
+---
+
+<h4>Challenges</h4>
+{% for challenge in site.challenges %}
+<time>{{ challenge.date | date: "%b %-d, %Y" }}</time>
+<h3><a href="{{ challenge.url | prepend: site.baseurl }}">{{ challenge.title }}</a></h3>
+{% endfor %}

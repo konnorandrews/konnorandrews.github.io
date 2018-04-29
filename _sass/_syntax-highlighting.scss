@@ -17,6 +17,11 @@ green     #859900  operators, other keywords
 */
 
 .highlight {
+  overflow: auto;
+  padding: 10px;
+}
+
+.highlight {
     background-color: #eef;
     color: #586e75;
     .c { color: #93a1a1 } /* Comment */
